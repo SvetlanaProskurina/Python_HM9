@@ -18,7 +18,6 @@ def read_phonebook(msg: telebot.types.Message):
     with open('phone_book.txt', 'r', encoding='utf-8'):
         bot.send_document(chat_id=msg.from_user.id, document=open('phone_book.txt', 'rb'))        
 
-
 # Импорт данных
 @bot.message_handler(commands=['import'])
 def import_phonebook(msg: telebot.types.Message):

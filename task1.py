@@ -5,6 +5,7 @@ import emoji
 print('Поиграем в крестики нолики?')
 
 field_for_game = list(range(1,10))
+
 # рисуем поле для игры
 def game_field(field_for_game):
     print('-'*13)
