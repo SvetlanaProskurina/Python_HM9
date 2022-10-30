@@ -8,16 +8,28 @@ bot = TeleBot('5750665963:AAEJP12QWonHXi0asBFMTZjlv4cLB8ezipM')
 def send_start_message(msg: telebot.types.Message):
     bot.send_message(chat_id=msg.from_user.id, text= ('Для действий с телефонной книгой доступны следующие функции:\n'
                                                       'Чтение /read \n'
+                                                      'Добавление /add \n'
                                                       'Поиск /search \n'
                                                       'Импорт /import \n'
                                                       'Эскпорт /export\n'))
 
-# загрузка в бот файла телефонной книги
+
+# загрузка в бот телефонной книги
 @bot.message_handler(commands=['read'])
 def read_phonebook(msg: telebot.types.Message):
-    with open('phone_book.txt', 'r', encoding='utf-8'):
-        bot.send_document(chat_id=msg.from_user.id, document=open('phone_book.txt', 'rb'))        
-
+    with open('phone_book.txt', 'r', encoding='utf-8') as rp:
+        data = rp.read()
+        bot.send_message(chat_id=msg.from_user.id, text = data) 
+        
+# загрузка в бот файла телефонной книги  
+@bot.message_handler(commands=['add'])
+def add_task(msg: telebot.types.Message):
+    bot.send_message(chat_id=msg.from_user.id, text='Добавьте ФИО и номер телефона')
+    @bot.message_handler(content_types='text')
+    def handle_text(message):
+        doc = open('phone_book.txt', 'a', encoding='utf-8')
+        doc.write("{imia}\n".format(imia=message.text))
+        
 # Импорт данных
 @bot.message_handler(commands=['import'])
 def import_phonebook(msg: telebot.types.Message):

@@ -10,23 +10,7 @@ butn2 = types.InlineKeyboardButton(text = 'Комплексные числа', c
 kb.add(butn1,butn2)
 
 def find_sign_simple(txt):
-   return ''.join([char for char in "+-/*" if char in txt])
-
-def komplex(txt):
-    res = None
-    lst = text.split()
-    if lst[1] == '-':
-        res = complex(lst[0]) - complex(lst[2])
-        return str(res)
-    elif lst[1] == '+':
-        res = complex(lst[0]) + complex(lst[2])
-        return str(res)
-    elif lst[1] == '/':
-        res = complex(lst[0]) / complex(lst[2])
-        return str(res)
-    elif lst[1] == '*':
-        res = complex(lst[0]) * complex(lst[2])
-        return str(res)    
+   return ''.join([char for char in "+-/*" if char in txt])   
 
 
 @bot.message_handler(commands=['start'])
@@ -84,8 +68,6 @@ def callback(call):
                 elif lst[1] == '*':
                     res = complex(lst[0]) * complex(lst[2])             
                     bot.send_message(call.message.chat.id, res)
-def simple_calc(msg: telebot.types.Message):
-        bot.send_message(chat_id=msg.from_user.id, text=calc(msg.text))
         
 
 bot.polling()
